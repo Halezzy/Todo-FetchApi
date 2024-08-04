@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ToDo App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="app" class="container">
+        <div class="card">
+            <div class="card-header">ToDo List</div>
+            <div class="flex items-center mb-4">
+                <input id="inputToDoItem" class="form-input w-full" type="text" placeholder="Add a new task" v-model="inputToDoItem" @keyup.enter="addItem">
+                <button type="button" class="btn btn-blue ml-4" @click="addItem" :disabled="inputToDoItemValue">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                    </svg>
+                </button>
+            </div>
+            <div class="todo-list">
+                <div class="todo-item" v-for="todoItem in todosList" :class="{ 'completed': todoItem.completed }">
+                    <input class="form-checkbox" type="checkbox" v-model="todoItem.completed">
+                    <label>{{ todoItem.todo }}</label>
+                    <button type="button" class="btn btn-red" @click="removeItem(todoItem)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="text-center text-gray-600">{{ itemsLeft }} items left</div>
+        </div>
+        <footer class="footer">
+            <p>Technologies used: Vue.js, Tailwind CSS, and HTML</p>
+            <p>API consumida: ApiText</p>
+            <p>Hugo Alessi &copy;<script>document.write(new Date().getFullYear());</script></p>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
